@@ -9,7 +9,7 @@ import { addUser, getUsers } from '../services/user';
 
 
 
-const UserForm = ({ setAddMode, setUsers }: UserFormProps) => {
+const UserForm = ({ setAddMode, populateList }: UserFormProps) => {
     const [postError, setPostError] = useState<string|null>(null);
 
     const schema = Yup.object().shape({
@@ -39,8 +39,7 @@ const UserForm = ({ setAddMode, setUsers }: UserFormProps) => {
             }
         } else {
             if(data.success) {
-                const userList = await getUsers()
-                setUsers(userList)
+                populateList()
                 setAddMode(false)
             } else {
                 setPostError(data.message);

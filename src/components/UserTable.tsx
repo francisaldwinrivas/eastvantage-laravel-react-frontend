@@ -3,14 +3,11 @@ import { User, UserList, Role } from '../interface';
 import { deleteUser, getUsers } from '../services/user';
 
 
-const UserTable = ( { users, isAdmin, setUsers }: UserList) => {
+const UserTable = ( { users, isAdmin, populateList }: UserList) => {
     const handleDelete = async (user: User) => {
         const { data } = await deleteUser(user);
         
-        if(data.success) {
-            const userList = await getUsers();
-            setUsers(userList)
-        }
+        if(data.success) populateList()
     }
 
     return (

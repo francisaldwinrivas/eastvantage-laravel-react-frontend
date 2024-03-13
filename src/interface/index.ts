@@ -40,11 +40,11 @@ export interface EditMode {
 
 export interface UserFormProps {
     setAddMode: (addMode: boolean) => void;
-    setUsers: (users: User[]|null) => void;
+    populateList: () => void;
 }
 
 export interface UserList {
     users: User[]|null;
     isAdmin: boolean|undefined;
-    setUsers: (users: User[]|null) => void;
+    populateList: () => void;
 }

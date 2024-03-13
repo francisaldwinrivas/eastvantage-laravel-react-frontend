@@ -39,9 +39,9 @@ const Dashboard = ({ setAccessToken, currentUser }: DashboardProps) => {
                 {addMode && <button type="button" className="btn btn-secondary btn-md" onClick={() => setAddMode(false)}>BACK</button>}
             </p>
 
-            {addMode && <UserForm setAddMode={setAddMode} setUsers={setUsers} />}
+            {addMode && <UserForm setAddMode={setAddMode} populateList={populateList} />}
 
-            {!addMode && <UserTable users={users} isAdmin={isAdmin} setUsers={setUsers}/>}
+            {!addMode && <UserTable users={users} isAdmin={isAdmin} populateList={populateList}/>}
         </div>
     )
 }
