@@ -3,25 +3,6 @@ export interface LoginInput {
     password: string;
 }
 
-export interface Role {
-    id: number;
-    name: string;
-}
-
-export interface DashboardProps extends LoginProps {}
-
-export interface LoginProps {
-    setAccessToken: (accessToken: string|null) => void;
-}
-
-export interface UserFormInput {
-    name: string;
-    email: string;
-    password: string;
-    password_confirmation: string;
-    roles: number[]
-}
-
 export interface User {
     id: number;
     name: string;
@@ -34,11 +15,36 @@ export interface Role {
     name: string;
 }
 
+export interface DashboardProps {
+    setAccessToken: (accessToken: string|null) => void;
+    currentUser: User|null;
+}
+
+export interface LoginProps {
+    setAccessToken: (accessToken: string|null) => void;
+    setCurrentUser: (user: User|null) => void;
+}
+
+export interface UserFormInput {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+    roles: number[]
+}
+
+export interface EditMode {
+    mode: boolean;
+    user: User|null;
+}
+
 export interface UserFormProps {
     setAddMode: (addMode: boolean) => void;
     setUsers: (users: User[]|null) => void;
 }
 
 export interface UserList {
-    users: User[]|null
+    users: User[]|null;
+    isAdmin: boolean|undefined;
+    setUsers: (users: User[]|null) => void;
 }

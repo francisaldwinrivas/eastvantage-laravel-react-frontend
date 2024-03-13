@@ -7,7 +7,8 @@ import { login } from '../services/auth';
 
 
 function Login({  
-    setAccessToken
+    setAccessToken,
+    setCurrentUser
 }: LoginProps) {
     const [postError, setPostError] = useState<string|null>(null);
 
@@ -28,7 +29,14 @@ function Login({
 
     const onSubmit : SubmitHandler<LoginInput> = async (formData: LoginInput) => {
         const { data } = await login(formData)
-        return data.success ? setAuthData(data.access_token) : setPostError(data.message);
+        if(data.success) {
+            setAuthData(data.access_token);
+            setCurrentUser(data.user)
+
+            console.log(data.user)
+        } else {
+            setPostError(data.message);
+        }
     }
 
     return (

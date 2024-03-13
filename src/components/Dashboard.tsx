@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { getUsers } from '../services/user'
-import { DashboardProps, User } from '../interface'
+import { DashboardProps, EditMode, Role, User } from '../interface'
 import UserForm from './UserForm'
 import UserTable from './UserTable'
+import { ROLES } from '../constants'
 
-const Dashboard = ({ setAccessToken }: DashboardProps) => {
+const Dashboard = ({ setAccessToken, currentUser }: DashboardProps) => {
     const [addMode, setAddMode] = useState<boolean>(false)
     const [users, setUsers] = useState<User[]|null>(null)
+    const isAdmin = currentUser?.roles.some(({ name }: Role) => name === ROLES[3])
+
+    console.log('currentUser', currentUser);
     
     const populateList = async () => {
         const userList = await getUsers();
@@ -35,9 +39,9 @@ const Dashboard = ({ setAccessToken }: DashboardProps) => {
                 {addMode && <button type="button" className="btn btn-secondary btn-md" onClick={() => setAddMode(false)}>BACK</button>}
             </p>
 
-            {addMode && <UserForm setAddMode={setAddMode} setUsers={setUsers}/>}
+            {addMode && <UserForm setAddMode={setAddMode} setUsers={setUsers} />}
 
-            {!addMode && <UserTable users={users} />}
+            {!addMode && <UserTable users={users} isAdmin={isAdmin} setUsers={setUsers}/>}
         </div>
     )
 }

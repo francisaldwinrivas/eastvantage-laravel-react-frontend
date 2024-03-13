@@ -23,11 +23,11 @@ const UserForm = ({ setAddMode, setUsers }: UserFormProps) => {
         .required('Please select role/s')
     }).required();
 
-    const { register, control, handleSubmit, setError, formState: { errors } } = useForm<UserFormInput>({
+    const { register, control, handleSubmit, setValue, setError, formState: { errors } } = useForm<UserFormInput>({
         resolver: yupResolver(schema)
     });
     
-
+    
     const onSubmit : SubmitHandler<UserFormInput> = async (formData: UserFormInput) => {
         const { data } = await addUser(formData);
         // console.log(response)
